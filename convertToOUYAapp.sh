@@ -9,7 +9,7 @@ if [ -d $outFolder ]; then
 	echo 'Converting apk to OUYA app...';
 	xmlFile=$outFolder'/AndroidManifest.xml';
 	contents=`cat $xmlFile`;
-	newContents=`awk '/android.intent.category.LAUNCHER/{print "<category android:name=\"ouya.intent.category.APP\"/>"}1' $xmlFile`
+	newContents=`awk '/android.intent.category.LAUNCHER/{print "<category android:name=\"tv.ouya.intent.category.APP\"/>"}1' $xmlFile`
 	rm $xmlFile;
 	touch $xmlFile;
 	echo $newContents >> $xmlFile;
