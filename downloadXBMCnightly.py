@@ -7,11 +7,12 @@ soup = BeautifulSoup(page)
 
 links = soup.body.find('div', attrs={'id': 'mirrorlist'}).find('pre').find_all('a')
 for link in links:
-	if 'hwaccel' in link.get('href') and not 'fulldebug' in link.get('href'):
-		filename = link.get('href')
-		f = urllib2.urlopen('http://mirrors.xbmc.org/test-builds/android/' + filename)
-		output = open(filename, 'wb')
-		output.write(f.read())
-		output.close()
-		print filename
-		break
+	filename = link.get('href')
+	if 'stagefright' in filename or 'hwaccel' in filename:
+		if not 'fulldebug' in filename:
+			f = urllib2.urlopen('http://mirrors.xbmc.org/test-builds/android/' + filename)
+			output = open(filename, 'wb')
+			output.write(f.read())
+			output.close()
+			print filename
+			break
